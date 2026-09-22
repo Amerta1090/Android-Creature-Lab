@@ -10,7 +10,7 @@
 - [x] R-005 — Clock abstraction
 - [x] R-006 — Seeded RNG utility
 - [x] R-007 — Error taxonomy
-- [ ] R-008 — Docs skeleton + ADRs
+- [x] R-008 — Docs skeleton + ADRs
 - [ ] R-009 — Dev runner + lint gates
 
 ## Sprint 02 — M1: Android Connection Layer

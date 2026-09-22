@@ -169,3 +169,18 @@
 - **Issues ditemukan:** (1) sisa `_boom` yang mereferensikan class tak ada di test CLI → dibersihkan. (2) tidak ada (config alias tidak merusak test lama).
 - **Perubahan state:** task selesai 6 → 7 (R-007 done) · Sprint 01 `IN PROGRESS` (7/9) · `status.md`/`backlog.md`/`sprint-01-m0.md`/`README` index diupdate · Task berjalan dikosongkan (next: R-008 — Docs skeleton + ADRs).
 - **Keputusan/ADR:** — (tidak ada; exit-code sebagai atribut kelas dipilih supaya `to_exit_code` satu-liner via MRO, default 1 sebagai safety net — sesuai failure mode R-007).
+
+---
+
+## 2026-09-22 — Sesi 3 (lanjutan) — R-008 Docs skeleton + ADRs
+
+- **State awal:** Sprint 1 (M0) `IN PROGRESS` 7/9 · task berjalan tidak ada (next R-008).
+- **Kerja (R-008 DoD):**
+  - `docs/adr/README.md` — index 8 ADR + **template ADR** untuk ADR berikutnya (Context/Decision/Consequences, status Proposed→Accepted, aturan update; sesuai DoD "template documented in README").
+  - `docs/adr/ADR-001..008.md` — masing-masing satu halaman, decisions mencerminkan PRD §0: 001 Python/stdlib (0.1, 0.10) · 002 host-side runtime (0.2) · 003 adb CLI wrapper (0.3) · 004 storage SQLite+JSON+JSONL (0.6) · 005 determinism policy (0.7) · 006 no-LLM-in-loop (0.8) · 007 poll+edge events (0.5) · 008 no-root baseline (0.4).
+  - `status.md` — section ADR Index diisi (list ADR + lokasi). README utama ditambah pointer ke `docs/adr/README.md`.
+  - `docs/PRD.md` sudah ter-commit sejak initial commit — tidak ada perubahan konten (R-008 scope "commit PRD" terpenuhi).
+- **Tests:** tidak ada (spec R-008: Tests: none). Gate: `pytest` tetap **84 passed**; ukuran file dicek (tiap ADR 1 halaman).
+- **Issues ditemukan:** tidak ada. Generator sprints TIDAK dijalankan (di luar scope; index sprint sudah benar pasca-Sesi 2).
+- **Perubahan state:** task selesai 7 → 8 (R-008 done) · Sprint 01 `IN PROGRESS` (8/9) · `status.md`/`backlog.md`/`sprint-01-m0.md`/`README` index diupdate · Task berjalan dikosongkan (next: R-009).
+- **Keputusan/ADR:** ADR-001..008 dibuat sesuai default PRD §0 (tidak ada keputusan baru; catat sebagai baseline decisions).

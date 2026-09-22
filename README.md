@@ -29,4 +29,6 @@ simulator-testable without hardware.
 - **Run:** `creature config validate` (config stack) and later
   `creature run` / `pokedex scan` talk to a connected Android device via adb.
 
-See `docs/PRD.md` for the full plan and `docs/status.md` for progress.
+See `docs/PRD.md` for the full plan, `docs/status.md` for progress, and
+`docs/adr/README.md` for the architecture decision records (index + template
+for writing new ADRs).

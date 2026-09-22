@@ -12,9 +12,9 @@
 - Git: **ter-initialize, branch `main`, remote `origin` → https://github.com/Amerta1090/Android-Creature-Lab.git** (first commit `62270f0`, sudah di-push 2026-09-22)
 - Catatan: `.gitignore` sudah dibuat saat setup repo; task `R-001` tinggal verifikasi/melengkapi + README + LICENSE + git init tidak perlu diulang.
 - Sprint aktif: **Sprint 1 — M0: Repository / Architecture**
-- Status sprint aktif: `IN PROGRESS` (7/9) — R-001..R-007 done
-- Task selesai: **7 / 106**
-- Task berjalan: — (tidak ada; berikutnya R-008 — Docs skeleton + ADRs)
+- Status sprint aktif: `IN PROGRESS` (8/9) — R-001..R-008 done
+- Task selesai: **8 / 106**
+- Task berjalan: — (tidak ada; berikutnya R-009 — Dev runner + lint gates)
 - Blocked: — (tidak ada)
 - Device Android: **terhubung** (per 2026-09-22) — vivo V2157, Android 14 (API 34), serial `34454119440004U` (USB)
 
@@ -37,7 +37,7 @@
 |--------|-----------|--------|-----------|
 | Sprint | Milestone | Status | Tasks done |
 |--------|-----------|--------|-----------|
-| 01 | M0 — Repository / Architecture | `IN PROGRESS` | 7 / 9 |
+| 01 | M0 — Repository / Architecture | `IN PROGRESS` | 8 / 9 |
 | 02 | M1 — Android Connection Layer | `NOT STARTED` | 0 / 7 |
 | 03 | M2 — Device Perception | `NOT STARTED` | 0 / 13 |
 | 04 | M3 — Creature State | `NOT STARTED` | 0 / 5 |
@@ -68,7 +68,8 @@
 
 ## ADR Index
 
-- ADR-001..ADR-008: **belum dibuat** → dibuat di task `R-008` (daftar topik di PRD §0 / `docs/PRD.md`).
+- ADR-001..ADR-008: **dibuat** di `docs/adr/` (task `R-008`, 2026-09-22) — index + template di `docs/adr/README.md`.
+  - ADR-001 Python/stdlib · ADR-002 host-side runtime · ADR-003 adb CLI wrapper · ADR-004 storage (SQLite+JSON+JSONL) · ADR-005 determinism policy · ADR-006 no-LLM-in-loop · ADR-007 poll+edge events · ADR-008 no-root baseline.
 
 ## Aturan Pemeliharaan (untuk agent)
 
