@@ -107,3 +107,20 @@
 - **Perubahan state:** task selesai 2 → 3; `docs/status.md` + `docs/backlog.md` + `docs/sprints/sprint-01-m0.md` + README index diupdate; device target terisi.
 - **Commits:** `<commit R-003>` (config system) — belum di-push (push menyusul setelah checkout preset).
 - **Next:** R-004 — Structured logging (`logging.py`).
+
+---
+
+## 2026-09-22 — Sesi 2 (lanjutan) — R-004 Structured logging (dikoreksi + diimplementasi)
+
+- **State awal:** Sprint 1 (M0) `IN PROGRESS` 3/9 · task berjalan R-004.
+- **Konflik ditemukan:** commit `52bf4e9` (docs R-003) keliru mencentang **R-004** di `docs/backlog.md` dan `sprint-01-m0.md` padahal belum ada implementasi/tests/commit sama sekali (`logging.py` tidak ada, `git log` tanpa "R-004"). `docs/status.md` (source of truth) sudah benar: 3/106, task berjalan R-004. Sesuai protokol §5 (konflik status/docs → tanyakan), dikonfirmasi ke user → disetujui: **koreksi checkbox + implementasi R-004 dari nol**.
+- **Kerja (test-first, R-004 DoD):**
+  - Checkbox R-004 direvert ke `[ ]` (backlog + sprint file) sebagai penanda aman, lalu diisi ulang setelah DoD terpenuhi.
+  - `src/android_creature/logging.py` — thin wrapper stdlib: `get_logger(name)` (single import surface; komponen = nama dotted `android_creature.<name>`), `configure_logging(level=None, format_spec=None)` idempotent (handler diganti, tidak menumpuk → "never duplicates frames"), level dari config `logging.level` (default `info`), format `HH:MM:SS.mmm LEVEL component message` (`%(asctime)s.%(msecs)03d %(levelname)s %(name)s %(message)s`, datefmt `%H:%M:%S`), StreamHandler → **stderr saja**; config invalid tidak menggagalkan setup (config CLI tetap exit 5); tanpa impor `time`/`datetime` (timestamp dirender stdlib di boundary — determinisme PRD NFR-2 aman).
+  - `cli/main.py` — wiring `-v`/`--verbose` (acceptance: `-v` tampilkan debug, default sembunyikan); usage/docstring diperbarui; output mesin tetap di stdout.
+  - `tests/unit/test_logging.py` (new) — 13 tests.
+- **Tests:** **38 passed** (0 failed) · `python -m compileall` clean · grep gate wall-clock/random pada `src/` CLEAN · `creature/pokedex --version` exit 0 · `creature config validate` exit 0.
+- **Acceptance end-to-end:** default → debug disembunyikan, `INFO android_creature.perception INFO-VISIBLE` tampil; `-v` → `DEBUG android_creature.perception DEBUG-VISIBLE-WITH-V` tampil. Machine output (`config OK`) tetap stdout, log di stderr.
+- **Issues ditemukan:** (1) checkbox R-004 salah centang (root cause di atas; sudah dikoreksi via sesi ini); (2) SyntaxWarning `\d` di docstring test → dirapikan.
+- **Perubahan state:** task selesai 3 → 4 (R-004 done) · Sprint 01 `IN PROGRESS` (4/9) · `status.md`/`backlog.md`/`sprint-01-m0.md`/`README` index diupdate · Task berjalan dikosongkan (next: R-005).
+- **Keputusan/ADR:** — (tidak ada perubahan arsitektur; config `logging.format` diperlakukan sebagai *template* bentuk baris, `%`-format kustom dihormati sebagai escape hatch — didokumentasikan di docstring logging.py).

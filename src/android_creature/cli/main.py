@@ -1,7 +1,8 @@
-"""Console entry points: `creature` and `pokedex` (PRD R-002/R-003).
+"""Console entry points: `creature` and `pokedex` (PRD R-002/R-003/R-004).
 
 Both accept `--version` (prints package version, exit 0) per the version smoke
-gate. `creature config <show|validate|set>` is the R-003 config surface:
+gate, and `-v`/`--verbose` (enable debug logs, PRD R-004 acceptance).
+`creature config <show|validate|set>` is the R-003 config surface:
 
 - ``show [path]``      print the merged config (deterministic, sorted) or one dotted path
 - ``validate``         exit 0 on a valid config, exit 5 on an invalid one
@@ -17,14 +18,17 @@ import sys
 
 import android_creature
 from android_creature import config
+from android_creature import logging as logging_mod
 
 USAGE = """\
 {prog} — Android Creature → Pokédex
 
-usage: {prog} [--version] [config <show|validate|set> ...]
+usage: {prog} [--version] [-v|--verbose] [config <show|validate|set> ...]
 
-Both `creature` and `pokedex` share this host-side runtime. Subcommands
-(`scan`, `observe`, `run`, …) arrive with their respective milestones.
+Logs go to stderr (format `HH:MM:SS.mmm LEVEL component message`); machine
+output to stdout. `-v`/`--verbose` enables debug logs; the default level comes
+from the `logging` config section. Subcommands (`scan`, `observe`, `run`, …)
+arrive with their respective milestones.
 """
 
 CONFIG_USAGE = """\
@@ -34,6 +38,13 @@ usage: {prog} config <show|validate|set>
   validate                    exit 0 if valid, exit 5 on invalid config
   set <dotted.path> <value>   write value into data/config.json (JSON types)
 """
+
+_VERBOSE_FLAGS = ("-v", "--verbose")
+
+
+def _configure(verbose: bool) -> None:
+    """Set up the project logger (R-004): debug when -v, else config default."""
+    logging_mod.configure_logging(level="debug" if verbose else None)
 
 
 def _emit_warnings(warnings: list[str]) -> None:
@@ -81,8 +92,11 @@ def _run(prog: str, argv: list[str]) -> int:
     if "--version" in argv or "-V" in argv:
         print(f"{prog} {android_creature.__version__}")
         return 0
-    if argv and argv[0] == "config":
-        return _run_config(prog, argv[1:])
+    verbose = any(flag in argv for flag in _VERBOSE_FLAGS)
+    _configure(verbose)
+    args = [arg for arg in argv if arg not in _VERBOSE_FLAGS]
+    if args and args[0] == "config":
+        return _run_config(prog, args[1:])
     # Unknown flag / extra args → print usage, exit 1 (version smoke uses exit 0 only).
     sys.stdout.write(USAGE.format(prog=prog))
     return 1 if argv else 0
