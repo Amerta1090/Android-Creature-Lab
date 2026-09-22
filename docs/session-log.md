@@ -139,3 +139,18 @@
 - **Issues ditemukan:** (1) test token-banned menangkap docstring `clock.py` yang menyebut `datetime.now`/`time.time` secara literal → docstring di-reword agar source bebas token (test bekerja sebagaimana dimaksud). (2) step `advance(0.0)` memutus asumsi kemonotonan ketat di test → dipisah: `advance(0)` menaikkan tick tanpa menggerakkan waktu (idle tick), didokumentasikan.
 - **Perubahan state:** task selesai 4 → 5 (R-005 done) · Sprint 01 `IN PROGRESS` (5/9) · `status.md`/`backlog.md`/`sprint-01-m0.md`/`README` index diupdate · Task berjalan dikosongkan (next: R-006).
 - **Keputusan/ADR:** — (tidak ada; konsisten PRD R-005 — SystemClock adapter sebagai default, SimClock untuk sim/test).
+
+---
+
+## 2026-09-22 — Sesi 3 (lanjutan) — R-006 Seeded RNG utility
+
+- **State awal:** Sprint 1 (M0) `IN PROGRESS` 5/9 · task berjalan tidak ada (next R-006).
+- **Kerja (test-first, R-006 DoD):**
+  - `src/android_creature/rng.py` — `SeededRng(seed, tick=0)`: `rand_float(a=0.0, b=1.0)` (interval apa pun urutannya), `choice(weighted)` (pasangan `(value, weight)`, weight ≥ 0, total > 0, `target <= cumulative`), `set_tick(tick)` → **per-tick stability** (seed+tick sama ⇒ stream identik; tick baru ⇒ stream baru deterministik). Seed dimix numerik dengan tick (`(seed << 32) ^ (tick & 0xFFFFFFFF)`) — tanpa argumen string seed (bisa jadi tidak deterministik antar proses karena hash randomization).
+  - **Desain determinisme kunci:** hanya `from random import Random` + panggil `Random.uniform(...)` — source `src/` **bebas token `random.`** sehingga grep gate `\brandom\.` tetap CLEAN tanpa pengecualian (DoD "no module-level random leakage" terpenuhi secara harfiah & semangat).
+  - `tests/conftest.py` — placeholder LCG `seeded_rng` diganti `SeededRng(0xC0FFEE)` sungguhan (source of truth R-006).
+  - `tests/unit/test_rng.py` (new) — 16 tests (reproducibility, bounds, weighted edge cases, per-tick stability, hygiene import + token).
+- **Tests:** **71 passed** (0 failed) · compileall clean · grep gate CLEAN · verifikasi determinisme **lintas proses** (dua proses `python -c` terpisah → stream identik).
+- **Issues ditemukan:** docstring `rng.py` memuat literal ``random.``-API → tertangkap hygiene test → di-reword (test bekerja sebagaimana dimaksud, sama polanya dengan R-005).
+- **Perubahan state:** task selesai 5 → 6 (R-006 done) · Sprint 01 `IN PROGRESS` (6/9) · `status.md`/`backlog.md`/`sprint-01-m0.md`/`README` index diupdate · Task berjalan dikosongkan (next: R-007).
+- **Keputusan/ADR:** — (tidak ada; stdlib `Random` int-seeded dipilih karena deterministik lintas proses; mixing seed+tick numerik -> tidak ada hash randomization).

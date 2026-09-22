@@ -12,9 +12,9 @@
 - Git: **ter-initialize, branch `main`, remote `origin` → https://github.com/Amerta1090/Android-Creature-Lab.git** (first commit `62270f0`, sudah di-push 2026-09-22)
 - Catatan: `.gitignore` sudah dibuat saat setup repo; task `R-001` tinggal verifikasi/melengkapi + README + LICENSE + git init tidak perlu diulang.
 - Sprint aktif: **Sprint 1 — M0: Repository / Architecture**
-- Status sprint aktif: `IN PROGRESS` (5/9) — R-001..R-005 done
-- Task selesai: **5 / 106**
-- Task berjalan: — (tidak ada; berikutnya R-006 — Seeded RNG utility)
+- Status sprint aktif: `IN PROGRESS` (6/9) — R-001..R-006 done
+- Task selesai: **6 / 106**
+- Task berjalan: — (tidak ada; berikutnya R-007 — Error taxonomy)
 - Blocked: — (tidak ada)
 - Device Android: **terhubung** (per 2026-09-22) — vivo V2157, Android 14 (API 34), serial `34454119440004U` (USB)
 
@@ -37,7 +37,7 @@
 |--------|-----------|--------|-----------|
 | Sprint | Milestone | Status | Tasks done |
 |--------|-----------|--------|-----------|
-| 01 | M0 — Repository / Architecture | `IN PROGRESS` | 5 / 9 |
+| 01 | M0 — Repository / Architecture | `IN PROGRESS` | 6 / 9 |
 | 02 | M1 — Android Connection Layer | `NOT STARTED` | 0 / 7 |
 | 03 | M2 — Device Perception | `NOT STARTED` | 0 / 13 |
 | 04 | M3 — Creature State | `NOT STARTED` | 0 / 5 |

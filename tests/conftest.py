@@ -4,9 +4,8 @@
   tests have a fully controllable "now". It is also installed as the module
   default ``android_creature.clock.clock`` (PRD R-005: global default
   SystemClock, replaced in tests/sim).
-- ``seeded_rng``: a fixed, reproducible seed stream (identical across every
-  run/OS). Stands in for the project-level ``SeededRng`` (R-006) until that
-  microtask lands.
+- ``seeded_rng``: a project-level ``SeededRng`` (R-006) with a fixed seed so
+  tests are reproducible and decision traces are deterministic (PRD §0.4).
 
 Both are stdlib-only.
 """
@@ -17,6 +16,7 @@ import pytest
 
 from android_creature import clock as clock_mod
 from android_creature.clock import SimClock
+from android_creature.rng import SeededRng
 
 
 @pytest.fixture
@@ -28,9 +28,6 @@ def clock(monkeypatch) -> SimClock:
 
 
 @pytest.fixture
-def seeded_rng() -> list[int]:
-    """A fixed, reproducible seed stream (identical across every run/OS)."""
-    # Deterministic LCG-style stream: no module-level `random` import anywhere.
-    seed = 0xC0FFEE
-    seed = (((seed * 1103515245) & 0x7FFFFFFF) + 12345) & 0x7FFFFFFF
-    return [seed, (seed * seed) & 0x7FFFFFFF]
+def seeded_rng() -> SeededRng:
+    """A fixed-seed SeededRng (same seed every run, reproducible streams)."""
+    return SeededRng(0xC0FFEE)
