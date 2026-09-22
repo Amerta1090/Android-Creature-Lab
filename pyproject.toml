@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=75.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "android-creature"
+description = "Android Creature → Pokédex: host-side autonomous agent runtime + device observability (Pokédex) subsystem, ADB-driven and deterministic."
+requires-python = ">=3.12"
+dynamic = ["version"]
+dependencies = []  # stdlib-only runtime deps (PRD §D / R-002 failure mode)
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+test = ["pytest>=8.0"]
+coverage = ["coverage[toml]>=7.0"]
+
+[project.scripts]
+creature = "android_creature.cli.main:creature"
+pokedex = "android_creature.cli.main:pokedex"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["android_creature*"]
+
+[tool.setuptools.dynamic]
+version = { attr = "android_creature.__version__" }
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra -q"
+
+[tool.coverage.run]
+source = ["src/android_creature"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 0  # 85% enforcement dimulai M6 (PRD §N exit criteria R-009)
