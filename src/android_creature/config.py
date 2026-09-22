@@ -18,9 +18,9 @@ Validation is declarative (``_SCHEMA``): typed leaf checks plus range/choice
 checks, errors reported with full dotted paths, unknown keys reported as
 warnings. Iteration/output is deterministic (``sort_keys`` everywhere).
 
-``ConfigError`` lives here until R-007 promotes it into the project-wide error
-taxonomy (``errors.to_exit_code``); CLI mapping of config failures → exit 5
-already matches R-007's plan.
+``ConfigError`` is promoted to the project-wide taxonomy (R-007): this module
+aliases ``errors.ConfigError`` (exit 5 via ``errors.to_exit_code``), and the
+CLI mapping of config failures → exit 5 already matches R-007's plan.
 """
 
 from __future__ import annotations
@@ -31,17 +31,16 @@ import os
 from pathlib import Path
 from typing import Any, Mapping
 
+from android_creature import errors
+from android_creature.errors import ConfigError
+
 #: Exit code for config failures (PRD R-003 acceptance: bad value → exit 5).
-CONFIG_ERROR_EXIT = 5
+CONFIG_ERROR_EXIT = errors.ConfigError.exit_code
 
 #: Default user config file, relative to the working directory (PRD §G.5/G.6).
 DEFAULT_CONFIG_FILE = "data/config.json"
 
 _ENV_PREFIX = "ACL_"
-
-
-class ConfigError(Exception):
-    """Invalid configuration (missing/unreadable file, schema violation)."""
 
 
 # --------------------------------------------------------------------------- #

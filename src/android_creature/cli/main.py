@@ -18,6 +18,7 @@ import sys
 
 import android_creature
 from android_creature import config
+from android_creature import errors
 from android_creature import logging as logging_mod
 
 USAGE = """\
@@ -89,6 +90,15 @@ def _run_config(prog: str, argv: list[str]) -> int:
 
 
 def _run(prog: str, argv: list[str]) -> int:
+    try:
+        return _run_inner(prog, argv)
+    except errors.LabError as exc:
+        # R-007 acceptance: top-level handler → one-line message + mapped exit.
+        print(f"error: {exc}", file=sys.stderr)
+        return errors.to_exit_code(exc)
+
+
+def _run_inner(prog: str, argv: list[str]) -> int:
     if "--version" in argv or "-V" in argv:
         print(f"{prog} {android_creature.__version__}")
         return 0

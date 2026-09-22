@@ -154,3 +154,18 @@
 - **Issues ditemukan:** docstring `rng.py` memuat literal ``random.``-API → tertangkap hygiene test → di-reword (test bekerja sebagaimana dimaksud, sama polanya dengan R-005).
 - **Perubahan state:** task selesai 5 → 6 (R-006 done) · Sprint 01 `IN PROGRESS` (6/9) · `status.md`/`backlog.md`/`sprint-01-m0.md`/`README` index diupdate · Task berjalan dikosongkan (next: R-007).
 - **Keputusan/ADR:** — (tidak ada; stdlib `Random` int-seeded dipilih karena deterministik lintas proses; mixing seed+tick numerik -> tidak ada hash randomization).
+
+---
+
+## 2026-09-22 — Sesi 3 (lanjutan) — R-007 Error taxonomy
+
+- **State awal:** Sprint 1 (M0) `IN PROGRESS` 6/9 · task berjalan tidak ada (next R-007).
+- **Kerja (test-first, R-007 DoD):**
+  - `src/android_creature/errors.py` — `LabError(Exception)` base dengan atribut kelas `exit_code`; `ConfigError` (5), `NoDeviceError` (3), `SafetyBlockedError` (4), `AdbError` base + kind typed: `AdbMissingBinaryError`/`AdbTransportError`/`AdbTimeoutError`/`AdbDeviceError` (semua → 1; dipakai A-001 untuk retry/install), `ParseError(message, details)`; `to_exit_code(exc)` resolusi via MRO (`getattr(type(exc), "exit_code", 1)`) — mapping subclass otomatis, default 1 untuk yang lupa di-map (failure mode R-007).
+  - **Konsolidasi:** `config.py` — class `ConfigError` lokal dihapus, diganti alias `config.ConfigError = errors.ConfigError`; `CONFIG_ERROR_EXIT = errors.ConfigError.exit_code` (satu sumber). Tidak ada test lama yang rusak (25 test config tetap hijau).
+  - `cli/main.py` — top-level handler `except errors.LabError` → one-line `error: <msg>` di stderr + `to_exit_code` (acceptance R-007); path config lama (exit 5, "config error:") tidak berubah.
+  - `tests/unit/test_errors.py` (new) — 12 tests (mapping, inheritance, chaining `__cause__`, ParseError details, konsolidasi config, CLI handler exit 3/1/5).
+- **Tests:** **84 passed** (0 failed) · compileall clean · grep gate CLEAN · entry smoke ok · mapping terverifikasi `{ConfigError:5, NoDeviceError:3, SafetyBlockedError:4, AdbTimeoutError:1, LabError:1}`.
+- **Issues ditemukan:** (1) sisa `_boom` yang mereferensikan class tak ada di test CLI → dibersihkan. (2) tidak ada (config alias tidak merusak test lama).
+- **Perubahan state:** task selesai 6 → 7 (R-007 done) · Sprint 01 `IN PROGRESS` (7/9) · `status.md`/`backlog.md`/`sprint-01-m0.md`/`README` index diupdate · Task berjalan dikosongkan (next: R-008 — Docs skeleton + ADRs).
+- **Keputusan/ADR:** — (tidak ada; exit-code sebagai atribut kelas dipilih supaya `to_exit_code` satu-liner via MRO, default 1 sebagai safety net — sesuai failure mode R-007).

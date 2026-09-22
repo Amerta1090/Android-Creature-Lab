@@ -9,7 +9,7 @@
 - [x] R-004 — Structured logging
 - [x] R-005 — Clock abstraction
 - [x] R-006 — Seeded RNG utility
-- [ ] R-007 — Error taxonomy
+- [x] R-007 — Error taxonomy
 - [ ] R-008 — Docs skeleton + ADRs
 - [ ] R-009 — Dev runner + lint gates
 
