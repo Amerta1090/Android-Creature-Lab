@@ -51,3 +51,12 @@
 - **Keputusan/ADR:** tidak ada perubahan arsitektur (murni tooling proses).
 - **Commits:** belum ada (git init dilakukan di R-001).
 - **Next:** Sprint 1 (M0) — R-001 (git init + skeleleton repo), bila user menyetujui untuk mulai.
+## 2026-09-22 — Sesi 1 (lanjutan) — R-001 finalization
+
+- **State awal:** Sprint 1 (M0) `IN PROGRESS`; R-001 sudah commit kode (`04474eb` — README, LICENSE, dirs src/tests/data). Note: `docs/sprints/README.md` index table keliru menampilkan SEMUA sprint `COMPLETE` — ini bertentangan dgn status.md/sprint file/git log; akan di-regenerate/benahi di R-008.
+- **Kerja:** R-001 — verifikasi DoD (dirs exist, data/ ignored, README two-phase, LICENSE MIT) + centang backlog & sprint file + snapshot status → `IN PROGRESS 1/9 · 1/106`.
+- **Tests:** make lint belum ada (R-009); tidak ada kode proyek selain skeleton → no-op.
+- **Issues ditemukan:** (1) `docs/sprints/README.md` index stale (semua COMPLETE) — dibuat otomatis, jangan diedit manual; fix via R-008. (2) README worktree sudah benar, tidak perlu regenerasi.
+- **Perubahan state:** task selesai 0 → 1 (R-001 done).
+- **Commits:** `04474eb` R-001 — Initialize monorepo skeleton.
+- **Next:** R-002 — Python package skeleton + toolchain.

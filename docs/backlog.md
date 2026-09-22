@@ -3,7 +3,7 @@
 > Dibuat otomatis dari `docs/PRD.md` §O · Total task terjadwal: **106** · Update: centang DI SINI dan di sprint file saat task selesai.
 
 ## Sprint 01 — M0: Repository / Architecture
-- [ ] R-001 — Initialize monorepo skeleton
+- [x] R-001 — Initialize monorepo skeleton
 - [ ] R-002 — Python package skeleton + toolchain
 - [ ] R-003 — Config system
 - [ ] R-004 — Structured logging

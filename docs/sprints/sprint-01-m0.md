@@ -7,7 +7,7 @@
 
 ## Tasks
 
-- [ ] **R-001 — Initialize monorepo skeleton**
+- [x] **R-001 — Initialize monorepo skeleton**
 - [ ] **R-002 — Python package skeleton + toolchain**
 - [ ] **R-003 — Config system**
 - [ ] **R-004 — Structured logging**
