@@ -72,3 +72,13 @@
 - **Keputusan/ADR:** — (tidak ada; toolchain murni eksekusi DoD, tidak mengubah arsitektur).
 - **Commits:** (ditambahkan saat commit keluar) R-002 — Python package skeleton + toolchain.
 - **Next:** R-003 — Config system.
+
+## 2026-09-22 — Sesi 517 (R-002) — Struktur package Python + toolchain (R-002 done)
+
+- **State awal:** Sprint 1 M0 `IN PROGRESS` (1/9); R-002 unchecked; ct `android_creature` ada di src.
+- **Kerja (test-first, R-002 DoD):** `pyproject.toml` (setuptools>=75, `[project.scripts] creature/pokedex`, PEP 440 dynamic version `0.1.0`, pytest+coverage config), `src/android_creature/__init__.py` (__version__="0.1.0", single source), `src/android_creature/cli/__init__.py` + `cli/main.py` (`creature`/`pokedex` console funcs → `_run` prints version/usage, `--version` exit 0), `.venv` + `pip install -e .[dev]` (pytest 9.1.1), `tests/conftest.py` (frozen clock + seeded LCG fixtures — no wall clock, stdlib-only), `tests/smoke/test_version.py` (both `--version` exit 0) + `tests/unit/test_package.py` (PEP440-sortable version, single-source symbol).
+- **Verifikasi/gate:** pyt `android_creature` importable; `pytest` **4 passed**; `creature --version` & `pokedex --version` exit 0 → `0.1.0`; `python -m compileall` clean; **grep gate clean** (no `datetime.now/time.time/wall-clock` in src — R-009 anti-pattern already satisfiable).
+- **Issues ditemukan:** (1) colliding basename: dua `tests/*/test_version.py` (smoke + unit) → pytest `import file mismatch`; fixed: unit renamed `test_package.py` (unique basename across suite; pytest import habits documented). (2) `docs/sprints/README.md` index stale (all sprints COMPLETE) — generated file, dibenahi di R-008 (regenerate from PRD §O), JANGAN hand-edit.
+- **Perubahan state:** task selesai 1 → 2 (R-002 done); Sprint 1 `IN PROGRESS` (2/9); sampel status sprint di `status.md` updated.
+- **Keputusan/ADR:** tidak ada ADR baru (toolchain murni; pyproject + DoD sudah menetapkan arah — konform PRD §R-002).
+- **Next:** R-003 — Config system.

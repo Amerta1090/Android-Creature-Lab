@@ -12,8 +12,8 @@
 - Git: **ter-initialize, branch `main`, remote `origin` → https://github.com/Amerta1090/Android-Creature-Lab.git** (first commit `62270f0`, sudah di-push 2026-09-22)
 - Catatan: `.gitignore` sudah dibuat saat setup repo; task `R-001` tinggal verifikasi/melengkapi + README + LICENSE + git init tidak perlu diulang.
 - Sprint aktif: **Sprint 1 — M0: Repository / Architecture**
-- Status sprint aktif: `IN PROGRESS` (1/9) — R-001 done
-- Task selesai: **1 / 106**
+- Status sprint aktif: `IN PROGRESS` (2/9) — R-001 & R-002 done
+- Task selesai: **2 / 106**
 - Task berjalan: — (tidak ada)
 - Blocked: — (tidak ada)
 - Device Android: tidak ada yang terhubung (per 2026-09-22)
@@ -37,7 +37,7 @@
 |--------|-----------|--------|-----------|
 | Sprint | Milestone | Status | Tasks done |
 |--------|-----------|--------|-----------|
-| 01 | M0 — Repository / Architecture | `IN PROGRESS` | 1 / 9 |
+| 01 | M0 — Repository / Architecture | `IN PROGRESS` | 2 / 9 |
 | 02 | M1 — Android Connection Layer | `NOT STARTED` | 0 / 7 |
 | 03 | M2 — Device Perception | `NOT STARTED` | 0 / 13 |
 | 04 | M3 — Creature State | `NOT STARTED` | 0 / 5 |
