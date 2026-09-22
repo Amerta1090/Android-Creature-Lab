@@ -5,8 +5,8 @@
 ## Sprint 01 — M0: Repository / Architecture
 - [x] R-001 — Initialize monorepo skeleton
 - [x] R-002 — Python package skeleton + toolchain
-- [ ] R-003 — Config system
-- [ ] R-004 — Structured logging
+- [x] R-003 — Config system
+- [x] R-004 — Structured logging
 - [ ] R-005 — Clock abstraction
 - [ ] R-006 — Seeded RNG utility
 - [ ] R-007 — Error taxonomy

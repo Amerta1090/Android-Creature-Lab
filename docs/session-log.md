@@ -95,3 +95,15 @@
 - **Perubahan state:** task selesai 1 → 2 (R-002 done); Sprint 1 `IN PROGRESS` (2/9); sampel status sprint di `status.md` updated.
 - **Keputusan/ADR:** tidak ada ADR baru (toolchain murni; pyproject + DoD sudah menetapkan arah — konform PRD §R-002).
 - **Next:** R-003 — Config system.
+
+---
+
+## 2026-09-22 — Sesi 2 — R-003 Config system + verifikasi device vivo V2157
+
+- **State awal:** Sprint 1 (M0) IN PROGRESS 2/9 · task berjalan R-003.
+- **Kerja:** R-003 — Config system: `config.py` (layered defaults < `data/config.json` < env `ACL_*` < CLI; deep-merge non-mutating; schema `.json` deterministic; `load_config_with_warnings`), CLI wiring `config show/validate/set` (exit 5 untuk config invalid, konsisten PRD R-003 §doD & R-007), 21 unit tests. Verifikasi device Android nyata: **vivo V2157, Android 14 (API 34), serial `34454119440004U`** — dicatat di `docs/status.md` (Open Question #1 RESOLVED).
+- **Tests:** 25 passed (unit+smoke). Gate wall-clock `grep` pada `src/` bersih.
+- **Issues ditemukan:** docs/sprints/README.md index stale (semua sprint terlabel COMPLETE padahal baru 2 task selesai) → diperbaiki atas konfirmasi user; tabel index kini IN PROGRESS (3/9) + NOT STARTED. `pyproject.toml` belum punya entry-point `config` di backlog (hanya wired di CLI) — didokumentasikan di session-log.
+- **Perubahan state:** task selesai 2 → 3; `docs/status.md` + `docs/backlog.md` + `docs/sprints/sprint-01-m0.md` + README index diupdate; device target terisi.
+- **Commits:** `<commit R-003>` (config system) — belum di-push (push menyusul setelah checkout preset).
+- **Next:** R-004 — Structured logging (`logging.py`).

@@ -12,9 +12,9 @@
 - Git: **ter-initialize, branch `main`, remote `origin` → https://github.com/Amerta1090/Android-Creature-Lab.git** (first commit `62270f0`, sudah di-push 2026-09-22)
 - Catatan: `.gitignore` sudah dibuat saat setup repo; task `R-001` tinggal verifikasi/melengkapi + README + LICENSE + git init tidak perlu diulang.
 - Sprint aktif: **Sprint 1 — M0: Repository / Architecture**
-- Status sprint aktif: `IN PROGRESS` (2/9) — R-001 & R-002 done
-- Task selesai: **2 / 106**
-- Task berjalan: — (tidak ada)
+- Status sprint aktif: `IN PROGRESS` (3/9) — R-001, R-002, R-003 done
+- Task selesai: **3 / 106**
+- Task berjalan: **R-004 — Structured logging**
 - Blocked: — (tidak ada)
 - Device Android: **terhubung** (per 2026-09-22) — vivo V2157, Android 14 (API 34), serial `34454119440004U` (USB)
 
