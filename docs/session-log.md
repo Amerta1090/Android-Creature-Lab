@@ -22,6 +22,19 @@
 
 ---
 
+## 2026-09-22 — Sesi 1 — Git setup + push pertama ke GitHub
+
+- **State awal:** repo belum di-init; hanya file planning + sistem iteratif (sesi 0).
+- **Kerja:** sesuai permintaan user `git remote add origin …` + `branch -M main` + `push -u origin main`; ditambah prasyarat: `git init`, `.gitignore`, commit pertama.
+- **Verifikasi:** git identity (Amerta1090 / abdulmajidr708@gmail.com), `gh` terautentikasi (https), remote GitHub `Amerta1090/Android-Creature-Lab` ada & kosong (`ls-remote` exit 0).
+- **Tests:** tidak ada kode proyek.
+- **Issues ditemukan:** tidak ada.
+- **Perubahan state:** repo `main` = commit `62270f0` (24 files, 2756 insertions), ter-push ke origin. `.gitignore` sudah dibuat (R-001 tinggal verifikasi). Sprint 1 tetap `NOT STARTED`, 0/106 task.
+- **Commits:** `62270f0` Initial commit: planning package (PRD) + iterative development system.
+- **Next:** Sprint 1 (M0) dimulai setelah persetujuan user — R-001 (README/LICENSE/dirs + verifikasi .gitignore), R-002 dst.
+
+---
+
 ## 2026-09-22 — Sesi 0 — Setup sistem pengembangan iteratif
 
 - **State awal:** proyek baru, hanya `docs/PRD.md` (perencanaan selesai).
