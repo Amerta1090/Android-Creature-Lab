@@ -1,48 +1,30 @@
 """Pytest fixtures shared across the suite (PRD R-002 / backlog R-002).
 
-- ``seeded_rng``: a project-level ``SeededRng`` (R-006) with a fixed seed so tests
-  are reproducible and decision traces are deterministic (PRD §0.4 determinism).
-- ``clock``: a configurable ``SimClock`` (R-005) that never reads wall time, so
-  tests have a fully controllable "now".
+- ``clock``: a deterministic ``SimClock`` (R-005) never reads wall time, so
+  tests have a fully controllable "now". It is also installed as the module
+  default ``android_creature.clock.clock`` (PRD R-005: global default
+  SystemClock, replaced in tests/sim).
+- ``seeded_rng``: a fixed, reproducible seed stream (identical across every
+  run/OS). Stands in for the project-level ``SeededRng`` (R-006) until that
+  microtask lands.
 
-Both are stdlib-only; they stand in for the real ``android_creature.clock`` /
-``android_creature.rng`` abstractions until those microtasks land (R-005/R-006).
+Both are stdlib-only.
 """
 
 from __future__ import annotations
 
 import pytest
 
-
-class _FrozenClock:
-    """Minimal deterministic clock stand-in: a fixed "now" that never advances
-    on its own and never touches wall-clock APIs."""
-
-    def __init__(self, iso: str = "2026-01-01T00:00:00") -> None:
-        self._iso = iso
-        self._tick = 0
-        # No datetime.now()/time.time() here by design (anti-pattern fail gate).
-
-    @property
-    def now(self) -> str:
-        return self._iso
-
-    @property
-    def tick(self) -> int:
-        return self._tick
-
-    def advance(self, seconds: int) -> str:
-        self._tick += seconds
-        # Deterministic placeholder: monotonic tick label, not real wall time.
-        for _ in range(seconds):  # pragma: no cover - expanded by R-005
-            self._tick += 0
-        return self._iso
+from android_creature import clock as clock_mod
+from android_creature.clock import SimClock
 
 
 @pytest.fixture
-def clock() -> _FrozenClock:
-    """A frozen, deterministic clock — never advances, never hits wall time."""
-    return _FrozenClock()
+def clock(monkeypatch) -> SimClock:
+    """A deterministic SimClock, installed as the global default clock too."""
+    sim = SimClock()
+    monkeypatch.setattr(clock_mod, "clock", sim)
+    return sim
 
 
 @pytest.fixture

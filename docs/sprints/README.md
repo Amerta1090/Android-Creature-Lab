@@ -4,7 +4,7 @@
 
 | Sprint | Milestone | Status | Tasks | File |
 |--------|-----------|--------|-------|------|
-| 01 | M0 — Repository / Architecture | IN PROGRESS (4/9) | 9 | `sprint-01-m0.md` |
+| 01 | M0 — Repository / Architecture | IN PROGRESS (5/9) | 9 | `sprint-01-m0.md` |
 | 02 | M1 — Android Connection Layer | NOT STARTED | 7 | `sprint-02-m1.md` |
 | 03 | M2 — Device Perception | NOT STARTED | 13 | `sprint-03-m2.md` |
 | 04 | M3 — Creature State | NOT STARTED | 5 | `sprint-04-m3.md` |

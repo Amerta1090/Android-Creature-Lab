@@ -11,7 +11,7 @@
 - [x] **R-002 — Python package skeleton + toolchain**
 - [x] **R-003 — Config system**
 - [x] **R-004 — Structured logging**
-- [ ] **R-005 — Clock abstraction**
+- [x] **R-005 — Clock abstraction**
 - [ ] **R-006 — Seeded RNG utility**
 - [ ] **R-007 — Error taxonomy**
 - [ ] **R-008 — Docs skeleton + ADRs**
@@ -27,4 +27,4 @@
 
 ## Catatan sesi / keputusan sprint ini
 
-- (diisi oleh agent setiap sesi)
+- R-005 (2026-09-22): conftest `_FrozenClock` diganti `SimClock` sungguhan (global default `clock` di-replace di tests). Hygiene banned-API: tidak ada `datetime.now`/`time.time` di seluruh `src/` (adapter memakai `monotonic`/`gmtime`).

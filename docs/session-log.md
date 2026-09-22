@@ -124,3 +124,18 @@
 - **Issues ditemukan:** (1) checkbox R-004 salah centang (root cause di atas; sudah dikoreksi via sesi ini); (2) SyntaxWarning `\d` di docstring test → dirapikan.
 - **Perubahan state:** task selesai 3 → 4 (R-004 done) · Sprint 01 `IN PROGRESS` (4/9) · `status.md`/`backlog.md`/`sprint-01-m0.md`/`README` index diupdate · Task berjalan dikosongkan (next: R-005).
 - **Keputusan/ADR:** — (tidak ada perubahan arsitektur; config `logging.format` diperlakukan sebagai *template* bentuk baris, `%`-format kustom dihormati sebagai escape hatch — didokumentasikan di docstring logging.py).
+
+---
+
+## 2026-09-22 — Sesi 3 — R-005 Clock abstraction
+
+- **State awal:** Sprint 1 (M0) `IN PROGRESS` 4/9 · task berjalan tidak ada (next R-005).
+- **Kerja (test-first, R-005 DoD):**
+  - `src/android_creature/clock.py` — `Clock` protocol (`now() -> float`, `iso() -> str`, `tick_id -> int`); `SystemClock` adapter (now = `time.monotonic()`, iso = UTC-Z via `time.gmtime()`, tick_id = int monotonic) sebagai **global default** `clock`; `SimClock` (origin default `2026-01-01T00:00:00`, `advance(sec>=0)` → elapsed + tick_id +1 per call termasuk step 0, now = epoch sim, iso = `YYYY-MM-DDTHH:MM:SS.mmmZ` deterministik); modul default diganti di tests/sim.
+  - **Hygiene determinisme:** `clock.py` menghindari token banned API sepenuhnya (tanpa `datetime.now`/`time.time` — wall time via `monotonic`/`gmtime`), sehingga grep gate tetap CLEAN tanpa pengecualian file; dijamin oleh test `test_clock_adapter_avoids_banned_api_tokens` + `test_only_clock_adapter_imports_time_datetime` (preview lint R-009).
+  - `tests/conftest.py` — `_FrozenClock` stand-in diganti `SimClock` sungguhan sekaligus dipasang sebagai `android_creature.clock.clock` via monkeypatch (sesuai PRD "replaced in tests/sim"); `seeded_rng` tetap (digantikan R-006).
+  - `tests/unit/test_clock.py` (new) — 14 tests.
+- **Tests:** **53 passed** (0 failed) · `python -m compileall` clean · grep gate banned-API pada `src/` CLEAN · `creature/pokedex --version` exit 0 · `creature config validate` exit 0.
+- **Issues ditemukan:** (1) test token-banned menangkap docstring `clock.py` yang menyebut `datetime.now`/`time.time` secara literal → docstring di-reword agar source bebas token (test bekerja sebagaimana dimaksud). (2) step `advance(0.0)` memutus asumsi kemonotonan ketat di test → dipisah: `advance(0)` menaikkan tick tanpa menggerakkan waktu (idle tick), didokumentasikan.
+- **Perubahan state:** task selesai 4 → 5 (R-005 done) · Sprint 01 `IN PROGRESS` (5/9) · `status.md`/`backlog.md`/`sprint-01-m0.md`/`README` index diupdate · Task berjalan dikosongkan (next: R-006).
+- **Keputusan/ADR:** — (tidak ada; konsisten PRD R-005 — SystemClock adapter sebagai default, SimClock untuk sim/test).

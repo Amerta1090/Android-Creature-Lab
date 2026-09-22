@@ -7,7 +7,7 @@
 - [x] R-002 — Python package skeleton + toolchain
 - [x] R-003 — Config system
 - [x] R-004 — Structured logging
-- [ ] R-005 — Clock abstraction
+- [x] R-005 — Clock abstraction
 - [ ] R-006 — Seeded RNG utility
 - [ ] R-007 — Error taxonomy
 - [ ] R-008 — Docs skeleton + ADRs
