@@ -1,6 +1,6 @@
 # Sprint 01 — M0: Repository / Architecture
 
-- Status: `NOT STARTED`
+- Status: `IN PROGRESS` (2026-09-22)
 - Objective: Repositori skeleton, package Python, toolchain, config, logging, clock, RNG, errors, docs/ADR, Makefile.
 - Entry criteria: Repo kosong tersedia (hanya dokumen). PRD + status sudah ada.
 - Spec task: `docs/PRD.md` §O (M0) · Checklist master: `docs/backlog.md`
