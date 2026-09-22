@@ -16,7 +16,7 @@
 - Task selesai: **2 / 106**
 - Task berjalan: — (tidak ada)
 - Blocked: — (tidak ada)
-- Device Android: tidak ada yang terhubung (per 2026-09-22)
+- Device Android: **terhubung** (per 2026-09-22) — vivo V2157, Android 14 (API 34), serial `34454119440004U` (USB)
 
 ## Environment Baseline (diverifikasi 2026-09-22)
 
@@ -27,7 +27,7 @@
 | git | 2.55.0 |
 | sqlite3 | 3.53.4 |
 | pytest | belum terpasang (dep dev; dipasang via `scripts/setup.sh`, task R-002) |
-| device android | tidak ada (`adb devices` kosong) |
+| device android | vivo V2157 / Android 14 / `34454119440004U` (`adb devices -l` kosong sebelumnya, terhubung 2026-09-22) |
 
 > Catatan: jika environment berubah di sesi berikutnya, agent update tabel ini.
 
@@ -57,7 +57,7 @@
 
 | # | Pertanyaan | Status |
 |---|-----------|--------|
-| 1 | Device test target (model + Android version)? | `OPEN` — user kirim `adb devices -l` saat memungkinkan. Tidak memblokir M0–M7. |
+| 1 | Device test target (model + Android version)? | `RESOLVED` — vivo V2157, Android 14 (API 34), serial `34454119440004U` (per 2026-09-22). Tidak memblokir M0–M7. |
 | 2 | USB atau adb-over-WiFi? | `OPEN` — default USB; tidak memblokir. |
 | 3 | Device selalu terhubung atau sesekali? | `OPEN` — diasumsikan sesekali (dev sim-first). |
 | 4 | Aksi audible/visible boleh selama dev? | `OPEN` — default SAFE on, CONTROL di-gate config. |

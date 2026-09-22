@@ -22,6 +22,19 @@
 
 ---
 
+## 2026-09-22 — Sesi 2 — HP terhubung + verifikasi env + perbaikan index sprint stale
+
+- **State awal:** Sprint 1 (M0) IN PROGRESS 2/9 (R-001, R-002 done), Task berjalan: tidak ada.
+- **Kerja:** Sesuai `prompt.md`: verifikasi environment (adb/python). Device Android **terhubung** — vivo V2157, Android 14 (API 34), serial `34454119440004U` (USB, transport_id 3). Open Question #1 (device test target) → RESOLVED, dicatat di `docs/status.md`. Konflik dokumen: index `docs/sprints/README.md` menampilkan semua sprint COMPLETE padahal hanya R-001/R-002 selesai → atas persetujuan user, tabel index diperbaiki (Sprint 1 `IN PROGRESS (2/9)`, Sprint 2–15 `NOT STARTED`).
+- **Tests:** tidak ada kode proyek berubah.
+- **Issues ditemukan:** `sprints/README.md` index stale (sudah diperbaiki); device target sebelumnya kosong → terisi.
+- **Perubahan state:** device Android terhubung & tercatat; OQ#1 RESOLVED; README index sprint konsisten dengan status.md/backlog. Task selesai tetap 2/106.
+- **Keputusan/ADR:** device baseline fixture = vivo V2157 / Android 14 (untuk M1/M8+ tuning, dan I-003/Sprint 13 nanti).
+- **Commits:** <dibuat di akhir sesi ini>
+- **Next:** lanjut Sprint 1 (M0) — verifikasi R-001 (.gitignore sudah ada), R-003 Config system, dst.
+
+---
+
 ## 2026-09-22 — Sesi 1 — Git setup + push pertama ke GitHub
 
 - **State awal:** repo belum di-init; hanya file planning + sistem iteratif (sesi 0).
