@@ -32,3 +32,11 @@ simulator-testable without hardware.
 See `docs/PRD.md` for the full plan, `docs/status.md` for progress, and
 `docs/adr/README.md` for the architecture decision records (index + template
 for writing new ADRs).
+
+## Development
+
+All dev commands are offline and device-free (`make setup && make test &&
+make lint` from a clean checkout). Targets: `setup`, `test` (unit/sim/adapter/
+regression, excludes hw), `test-hw` (device attached), `lint` (byte-compile +
+src hygiene), `record-fixture` (adb fixtures, wired in A-005). See
+`tests/README.md` for the test layout and conventions.

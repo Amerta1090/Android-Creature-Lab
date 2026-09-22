@@ -184,3 +184,29 @@
 - **Issues ditemukan:** tidak ada. Generator sprints TIDAK dijalankan (di luar scope; index sprint sudah benar pasca-Sesi 2).
 - **Perubahan state:** task selesai 7 → 8 (R-008 done) · Sprint 01 `IN PROGRESS` (8/9) · `status.md`/`backlog.md`/`sprint-01-m0.md`/`README` index diupdate · Task berjalan dikosongkan (next: R-009).
 - **Keputusan/ADR:** ADR-001..008 dibuat sesuai default PRD §0 (tidak ada keputusan baru; catat sebagai baseline decisions).
+
+---
+
+## 2026-09-22 — Sesi 4 — R-009 Dev runner + lint gates + penutupan Sprint 1 (M0)
+
+- **State awal:** Sprint 1 (M0) `IN PROGRESS` 8/9 · task berjalan tidak ada (next R-009).
+- **Kerja (R-009 DoD):**
+  - `Makefile` — target `setup` (venv+install via `scripts/setup.sh`), `test` (`pytest tests -m "not hw"` — unit/sim/adapter/regression offline), `test-hw` (`-m hw`, device), `lint` (compileall + src hygiene), `record-fixture` (stub, wiring di A-005), `clean`.
+  - `scripts/setup.sh` — bootstrap `.venv` + `pip install -e .[dev]`, idempotent, offline-friendly.
+  - `scripts/check_src_hygiene.py` — lint AST/teks: token banned (`datetime.now`, `time.time`, `random.`) + import stdlib-only (`sys.stdlib_module_names`) & pengelompokan stdlib-dulu.
+  - `tests/README.md` — struktur tier (unit/sim/adapter/regression), marker `hw`, fixture, aturan determinisme. Direktori placeholder `tests/sim|adapter|regression/.gitkeep` dibuat (make test koleksi bersih).
+  - README utama — section "Development" (target make + pointer tests/README.md).
+- **Acceptance (fresh-ish, offline):** `make setup` OK · `make lint` OK · `make test` **84 passed (0.80 s)** · `record-fixture` stub OK. Verifikasi exit criteria sprint: invalid config → **exit 5**, version/validate exit 0, grep gate CLEAN, PRD+ADRs committed.
+- **Issues ditemukan:** tidak ada.
+- **Perubahan state:** task selesai 8 → 9 (R-009 done) · **Sprint 1 (M0) → `COMPLETE`** (9/9, semua exit criteria lolos) · Sprint 2 (M1) **dibuka** `IN PROGRESS` (0/7) · `status.md`/`backlog.md`/sprint files/README index diupdate · Task berjalan dikosongkan (next: A-001).
+- **Keputusan/ADR:** — (tidak ada; coverage enforcement 85% didefer ke M6 sesuai exit criteria sprint 1).
+
+### Laporan akhir Sprint 1 — M0: Repository / Architecture
+
+- **Completed tasks (9):** R-001 monorepo skeleton (git init, README dua-fase, LICENSE, dirs) · R-002 package Python stdlib-only + toolchain (pyproject, entry points `creature`/`pokedex`, pytest) · R-003 config system (layered, validated, exit 5) · R-004 structured logging (stderr, format `HH:MM:SS.mmm LEVEL component message`, `-v`) · R-005 clock abstraction (`Clock`/`SystemClock`/`SimClock`, determinism backbone) · R-006 seeded RNG (`SeededRng`, per-tick stability, deterministik lintas proses) · R-007 error taxonomy (`LabError`+kind, `to_exit_code`, konsolidasi ConfigError) · R-008 docs skeleton + ADR-001..008 + template · R-009 dev runner + lint gates (Makefile, setup.sh, hygiene lint, tests/README.md).
+- **Failed tasks:** tidak ada.
+- **Tests:** 84 passed (unit+smoke) · lint (compileall + src hygiene) hijau · semua offline tanpa device/network.
+- **Discovered issues:** (1) checkbox R-004 salah centang oleh commit docs R-003 tanpa implementasi → dikoreksi & diimplementasi (dikonfirmasi user); (2) docstring memuat token banned API → tertangkap lint/hygiene test → reword; (3) index sprints README stale (pra-perbaikan Sesi 2).
+- **Architecture changes:** tidak ada (ADR-001..008 = baseline decisions PRD §0; M0 murni eksekusi rencana).
+- **Remaining work:** M1..M14 (97 task).
+- **Next sprint recommendation:** Sprint 2 (M1 — Android Connection Layer): A-001 AdbClient wire wrapper → A-002 discovery → A-003 state machine → A-004 getprop → A-005 fixture transport → A-006/A-007 adapter+failure tests. Device vivo V2157 (serial `34454119440004U`) tersedia sebagai target; M1 tetap dikerjakan offline-first via fixture/mock per PRD.

@@ -1,6 +1,6 @@
 # Sprint 02 — M1: Android Connection Layer
 
-- Status: `NOT STARTED`
+- Status: `IN PROGRESS` (2026-09-22) — M0 selesai
 - Objective: AdbClient, discovery, connection state machine, getprop, fixture transport, fault tests.
 - Entry criteria: M0 selesai.
 - Spec task: `docs/PRD.md` §O (M1) · Checklist master: `docs/backlog.md`
