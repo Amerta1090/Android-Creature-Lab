@@ -210,3 +210,12 @@
 - **Architecture changes:** tidak ada (ADR-001..008 = baseline decisions PRD §0; M0 murni eksekusi rencana).
 - **Remaining work:** M1..M14 (97 task).
 - **Next sprint recommendation:** Sprint 2 (M1 — Android Connection Layer): A-001 AdbClient wire wrapper → A-002 discovery → A-003 state machine → A-004 getprop → A-005 fixture transport → A-006/A-007 adapter+failure tests. Device vivo V2157 (serial `34454119440004U`) tersedia sebagai target; M1 tetap dikerjakan offline-first via fixture/mock per PRD.
+
+---
+
+## 2026-09-22 — Sesi 4 (penutup) — Sesi berhenti di Sprint 1
+
+- **State akhir:** Sprint 1 (M0) `COMPLETE` (9/9) · task selesai **9/106** · semua exit criteria lolos (diverifikasi) · commit `201306a` (R-009) + `e8f30ff` (docs sprint 1 COMPLETE) ter-push.
+- **Keputusan user:** sesi ini **berhenti di Sprint 1 saja** — tidak lanjut ke Sprint 2 (M1).
+- **Tindakan:** (1) WIP Sprint 2 yang baru ditulis (`tests/unit/test_adb_transport.py`, belum ter-commit) dibuang — belum ada kode Sprint 2 materi; (2) status Sprint 2 dikembalikan ke `NOT STARTED` di `docs/status.md`, `docs/sprints/README.md`, dan `sprint-02-m1.md` (sebelumnya sempat ditandai `IN PROGRESS (0/7)` di commit `e8f30ff` karena sprint dibuka formal; dikoreksi karena sesi tidak memasuki Sprint 2); (3) repositori bersih + push.
+- **Next session:** buka Sprint 2 (M1 — Android Connection Layer) → A-001 AdbClient wire wrapper (spek PRD §O M1; R-007 prereq terpenuhi).

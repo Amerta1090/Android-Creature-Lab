@@ -11,10 +11,10 @@
 - Repo: `/home/amerta/Android Creature Lab`
 - Git: **ter-initialize, branch `main`, remote `origin` → https://github.com/Amerta1090/Android-Creature-Lab.git** (first commit `62270f0`, sudah di-push 2026-09-22)
 - Catatan: `.gitignore` sudah dibuat saat setup repo; task `R-001` tinggal verifikasi/melengkapi + README + LICENSE + git init tidak perlu diulang.
-- Sprint aktif: **Sprint 2 — M1: Android Connection Layer**
-- Status sprint aktif: `IN PROGRESS` (0/7) — A-001..A-007
+- Sprint aktif: **Sprint 2 — M1: Android Connection Layer** (belum dibuka — sesi berhenti di akhir Sprint 1)
+- Status sprint aktif: `NOT STARTED` (0/7) — A-001..A-007
 - Task selesai: **9 / 106**
-- Task berjalan: — (tidak ada; berikutnya A-001 — AdbClient (wire wrapper))
+- Task berjalan: — (tidak ada; berikutnya A-001 — AdbClient (wire wrapper), sesi berikutnya)
 - Sprint selesai: **Sprint 1 (M0) `COMPLETE`** per 2026-09-22 (9/9 task, semua exit criteria lolos)
 - Blocked: — (tidak ada)
 - Device Android: **terhubung** (per 2026-09-22) — vivo V2157, Android 14 (API 34), serial `34454119440004U` (USB)
@@ -39,7 +39,7 @@
 | Sprint | Milestone | Status | Tasks done |
 |--------|-----------|--------|-----------|
 | 01 | M0 — Repository / Architecture | `COMPLETE` | 9 / 9 |
-| 02 | M1 — Android Connection Layer | `IN PROGRESS` | 0 / 7 |
+| 02 | M1 — Android Connection Layer | `NOT STARTED` | 0 / 7 |
 | 03 | M2 — Device Perception | `NOT STARTED` | 0 / 13 |
 | 04 | M3 — Creature State | `NOT STARTED` | 0 / 5 |
 | 05 | M4 — Decision Engine | `NOT STARTED` | 0 / 8 |
