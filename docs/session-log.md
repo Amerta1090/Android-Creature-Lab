@@ -60,3 +60,15 @@
 - **Perubahan state:** task selesai 0 → 1 (R-001 done).
 - **Commits:** `04474eb` R-001 — Initialize monorepo skeleton.
 - **Next:** R-002 — Python package skeleton + toolchain.
+
+## 2026-09-22 — Sprint 1 (R-002) — Python package skeleton + toolchain
+
+- **State awal:** Sprint 01 M0 `IN PROGRESS` 1/9 (R-001 done `da40fb8`). Backlog R-002 unchecked.
+- **Kerja (test-first, R-002 DoD):** pyproject.toml (setuptools>=75 pin, stdlib-only runtime, `[project.scripts] creature/pokedex`, pytest+coverage config), `src/android_creature/__init__.py` (__version__="0.1.0" single-source), `cli/main.py` (`creature`/`pokedex` entry funcs — `--version` exit 0), `cli/__init__.py` (package marker), tests/conftest.py (frozen clock + seeded LCG fixtures — no wall-clock; deterministic), tests/smoke/test_version.py + tests/unit/test_package.py (PEP440 sortable version), tests/unit/__init__.py. `.venv` + `pip install -e .[dev]` (pytest 9.1.1).
+- **Verifikasi (gate):** `pytest` **4 passed**; `creature --version` & `pokedex --version` exit 0 → 0.1.0; `python -m compileall` clean; **grep anti-pattern clean** (no datetime.now/time.time/random in src) — PRD wall-clock gate satisfied early.
+- **Tests:** 4 passed (2 smoke/unit version), 0 failed.
+- **Issues ditemukan:** (1) test basename collision `test_version` di tests/smoke vs tests/unit → pytest import-mismatch; fix: rename unit file ke `test_package.py`. (2) `docs/sprints/README.md` index masih menyiratkan semua sprint COMPLETE — generated, bona fide di R-008 docs task. (3) .gitignore sudah memuat `data/` — sinkron dgn R-002 DoD.
+- **Perubahan state:** task selesai 1 → 2 · Sprint 01 `IN PROGRESS` (2/9) · backlog + sprint-01 check R-002.
+- **Keputusan/ADR:** — (tidak ada; toolchain murni eksekusi DoD, tidak mengubah arsitektur).
+- **Commits:** (ditambahkan saat commit keluar) R-002 — Python package skeleton + toolchain.
+- **Next:** R-003 — Config system.
